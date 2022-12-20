@@ -1,0 +1,25 @@
+{% extends "detector/base.html" %}
+{% block title %}拾得物編集画面{% endblock %}
+{% block content %}
+<h2>拾得物編集画面</h2>
+<form action="{{ url_for('search_items.edit_items', item_id=item_id) }}" method="POST" novalidate="novalidate">
+    {{ form.csrf_token }}
+    <p>
+        {{ form.item_name.label }} {{ form.item_name(placeholder="品目を選択", value=item.item_name) }}
+    </p>
+    <p>
+        {{ form.item_color.label }} {{ form.item_color(placeholder="色", value=item.item_color) }}
+    </p>
+    <p>
+        {{ form.item_feature.label }} {{ form.item_feature(placeholder="特徴", value=item.item_feature) }}
+    </p>
+    <p>
+        {{ form.submit(class="btn btn-primary") }}
+    </p>
+</form>
+<hr />
+<p>このアイテムを削除したい場合は以下のボタンを押してください</p>
+<form action="{{ url_for('search_items.edit_items', item_id=item_id) }}" method="POST" novalidate="novalidate">
+    {{ deleteform.submit(class="btn btn-primary") }}
+</form>
+{% endblock %}

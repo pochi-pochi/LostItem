@@ -1,0 +1,10 @@
+{% extends "detector/base.html" %}
+{% block content %}登録完了画面{% endblock %}
+
+{% block content %}
+<section class="text-ceter">
+    <h2>拾得物登録完了</h2>
+    <p>取得物の登録が完了しました。トップページへ戻るボタンを押してください。</p>
+    <a class="btn btn-primary" href="{{ url_for('detector.index') }}" role="button">トップページへ戻る</a>
+</section>
+{% endblock %}

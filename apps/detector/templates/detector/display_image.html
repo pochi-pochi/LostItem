@@ -1,0 +1,31 @@
+{% extends "detector/base.html" %}
+{% block title %}登録内容確認{% endblock %}
+
+{% block content %}
+<h2>登録内容確認</h2>
+<p>登録する内容を設定し、登録するボタンを押してください。入力内容を編集する場合は、この画面で行ってください。</p>
+<p>写真を取り直す場合は、もう一度撮影を押してください。</p>
+<img src="{{ moved_path }}" alt="拾得物の画像">
+<p>予測される品目名は<strong>{{ result }}</strong>です。</p>
+
+<section class="dt-auth-main">
+    <form action="{{ url_for('detector.register_db') }}" method="POST">
+        {{ register_form.csrf_token }}
+        <p>
+            {{ register_form.item_name(class="control", palceholder="品目名") }}
+        </p>
+        <p>
+            {{ register_form.item_color(class="control", placeholder="色") }}
+        </p>
+        <p>
+            {{ register_form.item_feature(class="control", placeholder="特徴") }}
+        </p>
+        <p>
+            {{ register_form.submit(class="btn btn-primary") }}
+        </p>
+    </form>
+</section>
+
+<hr>
+<a class="btn btn-secondary" href="{{ url_for('detector.register') }}" role="button">もう一度撮影</a>
+{% endblock %}

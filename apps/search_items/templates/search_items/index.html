@@ -1,0 +1,19 @@
+{% extends "detector/base.html" %}
+{% block title %}拾得物の検索{% endblock %}
+
+{% block content %}
+<h2>拾得物の検索</h2>
+<p>検索したい条件を指定してください。</p>
+<form action="{{ url_for('search_items.index') }}" method="POST">
+    {{ search_form.csrf_token }}
+    <p>
+        {{ search_form.item_name.label }} {{ search_form.item_name }}
+    </p>
+    <p>
+        {{ search_form.item_color.label }} {{ search_form.item_color }}
+    </p>
+    <p>
+        {{ search_form.submit(class="btn btn-primary") }}
+    </p>
+</form>
+{% endblock %}

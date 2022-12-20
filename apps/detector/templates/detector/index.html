@@ -1,0 +1,19 @@
+{% extends "detector/base.html" %}
+{% block title %}拾得物管理アプリトップ{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    {% if current_user.is_authenticated %}
+    <p>ようこそ　<strong>{{ current_user.username }}</strong>さん</p>
+    <hr>
+    <p>新しい拾得物を登録したい際は<strong class="text-primary">拾得物登録</strong>を、
+        拾得物の検索をしたい場合は<strong class="text-primary">拾得物検索</strong>を押してください。</p>
+
+    {% else %}
+    <p>
+        拾得物の管理を行うアプリです。下記のボタンからログインしてください。
+    </p>
+    <a class="btn btn-primary mx-auto" href="{{ url_for('auth.login') }}">ログイン</a>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "detector/base.html" %}
+{% block title %}ユーザ編集{% endblock %}
+{% block content %}
+<h2>ユーザ編集</h2>
+<form action="{{ url_for('crud.edit_user', user_id=user.id) }}" method="POST" novalidate="novalidate">
+    {{ form.csrf_token }}
+    <p>{{ form.username.label }} {{ form.username(placeholder="ユーザ名", value=user.username) }}</p>
+    {% for error in form.username.errors %}
+    <span style="color: red;">{{ error }}</span>
+    {% endfor %}
+    <p>{{ form.password.label }} {{ form.password(placeholder="パスワード") }}</p>
+    {% for error in form.password.errors %}
+    <span style="color: red;">{{ error }}</span>
+    {% endfor %}
+    <p><input type="submit" value="更新"></p>
+</form>
+
+<form action="{{ url_for('crud.delete_user', user_id=user.id) }}" method="POST">
+    {{ form.csrf_token }}
+    <input type="submit" value="削除">
+</form>
+{% endblock %}

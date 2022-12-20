@@ -1,0 +1,24 @@
+{% extends "detector/base.html" %}
+{% block title %}ユーザ一覧{% endblock %}
+{% block content %}
+<h2>ユーザ一覧</h2>
+<a href="{{ url_for('crud.create_user') }}">ユーザー新規作成</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ユーザーID</th>
+            <th scope="col">ユーザー名</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>
+                <a href="{{ url_for('crud.edit_user', user_id=user.id) }}">{{ user.id }}</a>
+            </td>
+            <td>{{ user.username }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "detector/base.html" %}
+{% block title %}拾得物一覧画面{% endblock %}
+{% block content %}
+{% if search_images%}
+<h2>拾得物一覧</h2>
+<p>条件による絞り込みの結果、以下の拾得物が検索されました。</p>
+<p>拾得物情報を編集する場合は、IDを押してください。</p>
+
+<div class="card col-md-7 dt-image-content">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">写真</th>
+                <th scope="col">品目名</th>
+                <th scope="col">色</th>
+                <th scope="col">特徴</th>
+                <th scope="col">登録日</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in search_itmes %}
+            <tr>
+                <td>
+                    <a href="{{ url_for('search_items/edit_items', item_id=item.item_id) }}">{{ item.item_id }}(編集)</a>
+                </td>
+                <td>
+                    <img src="{{ url_for('detector/renamed_images', filename=item.item_image_path) }}" alt="拾得物の画像">
+                </td>
+                <td>{{ item.item_name }}</td>
+                <td>{{ item.item_color }}</td>
+                <td>{{ item.item_feature }}</td>
+                <td>{{ item.item_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% else %}
+<p>お探しの拾得物は見つかりませんでした。</p>
+{% endif %}
+<hr />
+<a class="btn btn-primary" href="{{ url_for('detector.index') }}" role="button">トップページへ</a>
+{% endblock %}
