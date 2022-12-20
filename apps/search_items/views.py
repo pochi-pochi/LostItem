@@ -38,7 +38,7 @@ def tables(item_name, item_color):
 
 
 # 指定したアイテムの編集画面
-@search_items.route("/edit_items/<itemid>", methods=["GET" "POST"])
+@search_items.route("/edit_items/<itemid>", methods=["GET", "POST"])
 def edit_items(itemid):
     form = RegisterItemForm()
     deleteform = DeleteItem()
@@ -59,7 +59,7 @@ def edit_items(itemid):
         redirect(url_for("search_items.delete_item"))
 
     return render_template(
-        "search_item/edit_items.html", item=item, form=form, deleteform=deleteform
+        "search_items/edit_items.html", item=item, form=form, deleteform=deleteform
     )
 
 

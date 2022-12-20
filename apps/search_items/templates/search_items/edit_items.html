@@ -2,7 +2,7 @@
 {% block title %}拾得物編集画面{% endblock %}
 {% block content %}
 <h2>拾得物編集画面</h2>
-<form action="{{ url_for('search_items.edit_items', item_id=item_id) }}" method="POST" novalidate="novalidate">
+<form action="{{ url_for('search_items.edit_items', itemid=item.item_id) }}" method="POST" novalidate="novalidate">
     {{ form.csrf_token }}
     <p>
         {{ form.item_name.label }} {{ form.item_name(placeholder="品目を選択", value=item.item_name) }}
@@ -19,7 +19,7 @@
 </form>
 <hr />
 <p>このアイテムを削除したい場合は以下のボタンを押してください</p>
-<form action="{{ url_for('search_items.edit_items', item_id=item_id) }}" method="POST" novalidate="novalidate">
+<form action="{{ url_for('search_items.edit_items', itemid=item.item_id) }}" method="POST" novalidate="novalidate">
     {{ deleteform.submit(class="btn btn-primary") }}
 </form>
 {% endblock %}

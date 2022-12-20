@@ -19,13 +19,13 @@
             </tr>
         </thead>
         <tbody>
-            {% for item in search_itmes %}
+            {% for item in search_images %}
             <tr>
                 <td>
-                    <a href="{{ url_for('search_items/edit_items', item_id=item.item_id) }}">{{ item.item_id }}(編集)</a>
+                    <a href="{{ url_for('search_items.edit_items', itemid=item.item_id) }}">{{ item.item_id }}(編集)</a>
                 </td>
-                <td>
-                    <img src="{{ url_for('detector/renamed_images', filename=item.item_image_path) }}" alt="拾得物の画像">
+                <td class="table-img">
+                    <img src=item.item_image_path alt="拾得物の画像">
                 </td>
                 <td>{{ item.item_name }}</td>
                 <td>{{ item.item_color }}</td>

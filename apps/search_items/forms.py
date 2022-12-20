@@ -6,21 +6,21 @@ class Search(FlaskForm):
     item_name = SelectField(
         label=("品目名"),
         choices=[
-            ("ballpoint", "ボールペン"),
-            ("banana", "バナナ"),
-            ("coffee_mug", "コーヒーマグ"),
-            ("other", "その他"),
+            ("ボールペン", "ボールペン"),
+            ("バナナ", "バナナ"),
+            ("コーヒーマグ", "コーヒーマグ"),
+            ("その他", "その他"),
         ],
     )
 
     item_color = SelectField(
         label=("色"),
         choices=[
-            ("red", "赤系"),
-            ("blue", "青系"),
-            ("green", "緑系"),
-            ("patterned", "柄"),
-            ("other", "その他"),
+            ("赤系", "赤系"),
+            ("青系", "青系"),
+            ("緑系", "緑系"),
+            ("柄", "柄"),
+            ("その他", "その他"),
         ],
     )
 

@@ -11,4 +11,3 @@ class Items(db.Model):
     item_feature = db.Column(db.String)
     item_image_path = db.Column(db.String)
     item_date = db.Column(db.DateTime, default=datetime.now)
-    is_detected = db.Column(db.Boolean, default=False)
