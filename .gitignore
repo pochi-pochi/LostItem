@@ -260,7 +260,6 @@ poetry.toml
 
 #追記
 .vscode
-static
 imagenet_class_index.json
 vgg16.pt
 local.sqlite
