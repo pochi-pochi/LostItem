@@ -1,4 +1,11 @@
-from flask import Blueprint, redirect, render_template, url_for
+from flask import (
+    Blueprint,
+    current_app,
+    redirect,
+    render_template,
+    send_from_directory,
+    url_for,
+)
 
 from apps.app import db
 from apps.detector.forms import RegisterItemForm
@@ -70,3 +77,10 @@ def delete_item(item_id):
     db.session.delete(item)
     db.session.commit()
     return redirect(url_for("search_items.edit_items"))
+
+
+# 画像の表示
+@search_items.route("/images/<path:filename>")
+def image_file(filename):
+    filename = filename[53:]
+    return send_from_directory(current_app.config["UPLOAD_FOLDER"], filename)

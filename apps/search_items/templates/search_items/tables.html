@@ -6,8 +6,8 @@
 <p>条件による絞り込みの結果、以下の拾得物が検索されました。</p>
 <p>拾得物情報を編集する場合は、IDを押してください。</p>
 
-<div class="card col-md-7 dt-image-content">
-    <table class="table">
+<div class="card col-md-18 dt-image-content">
+    <table class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -25,7 +25,10 @@
                     <a href="{{ url_for('search_items.edit_items', itemid=item.item_id) }}">{{ item.item_id }}(編集)</a>
                 </td>
                 <td class="table-img">
-                    <img src=item.item_image_path alt="拾得物の画像">
+                    <a href="{{ url_for('search_items.image_file', filename=item.item_image_path) }}"
+                        target="_blank"><img
+                            src="{{ url_for('search_items.image_file', filename=item.item_image_path) }}" alt="拾得物の画像"
+                            width="190" height="130"></a>
                 </td>
                 <td>{{ item.item_name }}</td>
                 <td>{{ item.item_color }}</td>

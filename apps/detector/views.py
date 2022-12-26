@@ -6,7 +6,7 @@ from pathlib import Path
 
 import numpy as np
 import torch
-from flask import Blueprint, current_app, render_template
+from flask import Blueprint, current_app, render_template, send_from_directory
 from flask_login import login_required
 from PIL import Image
 from torchvision import transforms
@@ -174,3 +174,9 @@ class ILSVRCPredictor:
 @dt.route("/commit", methods=["POST"])
 def commit():
     return render_template("detector/commit.html")
+
+
+# 画像の表示
+@dt.route("/images/<path:filename>")
+def image_file(filename):
+    return send_from_directory(current_app.config["UPLOAD_FOLDER_2"], filename)
