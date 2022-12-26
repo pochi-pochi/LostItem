@@ -10,7 +10,7 @@ from flask import (
 from apps.app import db
 from apps.detector.forms import RegisterItemForm
 from apps.detector.models import Items
-from apps.search_items.forms import DeleteItem, Search
+from apps.search_items.forms import DeleteItem, Police, Search
 
 # アプリのインスタンス生成
 search_items = Blueprint(
@@ -58,6 +58,8 @@ def edit_items(itemid):
         item.item_name = form.item_name.data
         item.item_color = form.item_color.data
         item.item_feature = form.item_feature.data
+        item.item_right = form.item_right.data
+        item.item_police = form.item_police.data
         db.session.add(item)
         db.session.commit()
         return redirect(url_for("search_items.all"))
@@ -84,3 +86,25 @@ def delete_item(item_id):
 def image_file(filename):
     filename = filename[53:]
     return send_from_directory(current_app.config["UPLOAD_FOLDER"], filename)
+
+
+# 警察届出物品の検索
+@search_items.route("/police", methods=["GET", "POST"])
+def police():
+    police_form = Police()
+
+    if police_form.validate_on_submit():
+        item_police = police_form.item_police.data
+        return redirect(url_for("search_items.police_tables", item_police=item_police))
+
+    return render_template("search_items/police.html", police_form=police_form)
+
+
+# 警察届出物品の一覧
+@search_items.route("/police_tables/<item_police>")
+def police_tables(item_police):
+    item_police += " 00:00:00.000000"
+    print(item_police)
+    police_items = db.session.query(Items).filter_by(item_police=item_police).all()
+
+    return render_template("search_items/police_tables.html", police_items=police_items)

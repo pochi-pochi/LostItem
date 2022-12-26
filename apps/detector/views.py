@@ -129,6 +129,8 @@ def display_image():
             item_color=register_form.item_color.data,
             item_feature=register_form.item_feature.data,
             item_image_path=moved_path,
+            item_right=register_form.item_right.data,
+            item_police=register_form.item_police.data,
         )
         db.session.add(new_item)
         db.session.commit()

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import SelectField, SubmitField
+from wtforms import DateField, SelectField, SubmitField
 
 
 class Search(FlaskForm):
@@ -29,3 +29,8 @@ class Search(FlaskForm):
 
 class DeleteItem(FlaskForm):
     submit = SubmitField("削除")
+
+
+class Police(FlaskForm):
+    item_police = DateField("警察届出予定日")
+    submit = SubmitField("検索")

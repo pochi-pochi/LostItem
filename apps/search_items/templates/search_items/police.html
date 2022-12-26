@@ -1,0 +1,15 @@
+{% extends "detector/base.html" %}
+{% block title %}届出物品{% endblock %}
+{% block content %}
+<h2>警察届出物品検索</h2>
+<p>警察に届け出る予定日を指定し、検索ボタンを押してください。</p>
+<form action="{{ url_for('search_items.police') }}" method="POST">
+    {{ police_form.csrf_token }}
+    <p>
+        {{ police_form.item_police.label }} {{ police_form.item_police }}
+    </p>
+    <p>
+        {{ police_form.submit(class="btn btn-primary") }}
+    </p>
+</form>
+{% endblock %}

@@ -1,5 +1,11 @@
 from flask_wtf.form import FlaskForm
-from wtforms.fields import SelectField, SubmitField, TextAreaField
+from wtforms.fields import (
+    BooleanField,
+    DateField,
+    SelectField,
+    SubmitField,
+    TextAreaField,
+)
 
 
 class RegisterItemForm(FlaskForm):
@@ -25,5 +31,9 @@ class RegisterItemForm(FlaskForm):
     )
 
     item_feature = TextAreaField("特徴")
+
+    item_right = BooleanField("権利主張")
+
+    item_police = DateField("警察届け予定日")
 
     submit = SubmitField("登録")

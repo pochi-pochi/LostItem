@@ -4,8 +4,9 @@
 {% block content %}
 <h2>登録内容確認</h2>
 <p>登録する内容を設定し、登録するボタンを押してください。入力内容を編集する場合は、この画面で行ってください。</p>
+<p>拾得物を警察に届ける予定がない場合は、過去の日付を選択してください。</p>
 <p>写真を取り直す場合は、もう一度撮影を押してください。</p>
-<img src="{{ url_for('detector.image_file', filename='captured-video.jpg') }}" alt="拾得物の画像" width="300" height="250">
+<img src="{{ url_for('detector.image_file', filename='captured-video.jpg') }}" alt="拾得物の画像" width="200" height="150">
 <p>予測される品目名は<strong>{{ result }}</strong>です。</p>
 
 <section class="dt-auth-main">
@@ -19,6 +20,12 @@
         </p>
         <p>
             {{ register_form.item_feature(class="control", placeholder="特徴") }}
+        </p>
+        <p>
+            {{ register_form.item_right.label }} {{ register_form.item_right }}
+        </p>
+        <p>
+            {{ register_form.item_police.label }} {{ register_form.item_police }}
         </p>
         <p>
             {{ register_form.submit(class="btn btn-primary") }}

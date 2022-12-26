@@ -11,3 +11,5 @@ class Items(db.Model):
     item_feature = db.Column(db.String)
     item_image_path = db.Column(db.String)
     item_date = db.Column(db.DateTime, default=datetime.now)
+    item_right = db.Column(db.Boolean, default=False)
+    item_police = db.Column(db.DateTime, default=datetime.now)

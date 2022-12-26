@@ -19,7 +19,7 @@
 </form>
 <hr />
 <p>このアイテムを削除したい場合は以下のボタンを押してください</p>
-<form action="{{ url_for('search_items.edit_items', itemid=item.item_id) }}" method="POST" novalidate="novalidate">
+<form action="{{ url_for('search_items.delete_items', itemid=item.item_id) }}" method="POST" novalidate="novalidate">
     {{ deleteform.submit(class="btn btn-primary") }}
 </form>
 {% endblock %}
