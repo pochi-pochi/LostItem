@@ -264,3 +264,5 @@ imagenet_class_index.json
 vgg16.pt
 local.sqlite
 migrations/
+apps/detector/images/*
+apps/detector/renamed_images/*

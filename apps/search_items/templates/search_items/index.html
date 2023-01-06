@@ -4,6 +4,7 @@
 {% block content %}
 <h2>拾得物の検索</h2>
 <p>検索したい条件を指定してください。</p>
+<p>すべての拾得物を一覧で表示したい場合は、一覧表示ボタンを押してください。</p>
 <form action="{{ url_for('search_items.index') }}" method="POST">
     {{ search_form.csrf_token }}
     <p>
@@ -14,6 +15,12 @@
     </p>
     <p>
         {{ search_form.submit(class="btn btn-primary") }}
+    </p>
+</form>
+<form action="{{ url_for('search_items.index') }}" method="POST">
+    {{ all_form.csrf_token }}
+    <p>
+        {{ all_form.submit(class="btn btn-primary") }}
     </p>
 </form>
 {% endblock %}

@@ -32,6 +32,26 @@ class RegisterItemForm(FlaskForm):
 
     item_feature = TextAreaField("特徴")
 
+    item_floor = SelectField(
+        label=("拾得場所"),
+        choices=[
+            ("1階", "1階"),
+            ("2階", "2階"),
+            ("3階", "3階"),
+            ("4階", "4階"),
+        ],
+    )
+
+    item_place = SelectField(
+        label=("保管場所"),
+        choices=[
+            ("A", "A"),
+            ("B", "B"),
+            ("C", "C"),
+            ("D", "D"),
+        ],
+    )
+
     item_right = BooleanField("権利主張")
 
     item_police = DateField("警察届け予定日")

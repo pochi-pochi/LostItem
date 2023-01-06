@@ -6,11 +6,12 @@ from flask import (
     send_from_directory,
     url_for,
 )
+from flask_login import login_required
 
 from apps.app import db
 from apps.detector.forms import RegisterItemForm
 from apps.detector.models import Items
-from apps.search_items.forms import DeleteItem, Police, Search
+from apps.search_items.forms import All, DeleteItem, Police, Search
 
 # アプリのインスタンス生成
 search_items = Blueprint(
@@ -20,6 +21,7 @@ search_items = Blueprint(
 
 # indexエンドポイント
 @search_items.route("/", methods=["GET", "POST"])
+@login_required
 def index():
     search_form = Search()
     if search_form.validate_on_submit():
@@ -29,11 +31,20 @@ def index():
             url_for("search_items.tables", item_name=items_name, item_color=items_color)
         )
 
-    return render_template("search_items/index.html", search_form=search_form)
+    all_form = All()
+    if all_form.validate_on_submit():
+        all_items = db.session.query(Items).all()
+
+        return render_template("search_items/all.html", all_items=all_items)
+
+    return render_template(
+        "search_items/index.html", search_form=search_form, all_form=all_form
+    )
 
 
 # 検索結果の一覧表示
 @search_items.route("/tables/<item_name>/<item_color>")
+@login_required
 def tables(item_name, item_color):
     search_images = (
         db.session.query(Items)
@@ -46,6 +57,7 @@ def tables(item_name, item_color):
 
 # 指定したアイテムの編集画面
 @search_items.route("/edit_items/<itemid>", methods=["GET", "POST"])
+@login_required
 def edit_items(itemid):
     form = RegisterItemForm()
     deleteform = DeleteItem()
@@ -58,14 +70,16 @@ def edit_items(itemid):
         item.item_name = form.item_name.data
         item.item_color = form.item_color.data
         item.item_feature = form.item_feature.data
+        item.item_floor = form.item_floor.data
+        item.item_place = form.item_place.data
         item.item_right = form.item_right.data
         item.item_police = form.item_police.data
         db.session.add(item)
         db.session.commit()
-        return redirect(url_for("search_items.all"))
+        return redirect(url_for("search_items.index"))
 
     if deleteform.validate_on_submit():
-        redirect(url_for("search_items.delete_item"))
+        redirect(url_for("search_items.delete_item", itemid=item.item_id))
 
     return render_template(
         "search_items/edit_items.html", item=item, form=form, deleteform=deleteform
@@ -73,16 +87,18 @@ def edit_items(itemid):
 
 
 # 指定したアイテムの削除
-@search_items.route("/delete/<item_id>", methods=["GET", "POST"])
-def delete_item(item_id):
-    item = Items.query.filter_by(item_id=item_id).first()
+@search_items.route("/delete/<itemid>", methods=["GET", "POST"])
+@login_required
+def delete_item(itemid):
+    item = Items.query.filter_by(item_id=itemid).first()
     db.session.delete(item)
     db.session.commit()
-    return redirect(url_for("search_items.edit_items"))
+    return redirect(url_for("search_items.index"))
 
 
 # 画像の表示
 @search_items.route("/images/<path:filename>")
+@login_required
 def image_file(filename):
     filename = filename[53:]
     return send_from_directory(current_app.config["UPLOAD_FOLDER"], filename)
@@ -90,6 +106,7 @@ def image_file(filename):
 
 # 警察届出物品の検索
 @search_items.route("/police", methods=["GET", "POST"])
+@login_required
 def police():
     police_form = Police()
 
@@ -102,6 +119,7 @@ def police():
 
 # 警察届出物品の一覧
 @search_items.route("/police_tables/<item_police>")
+@login_required
 def police_tables(item_police):
     item_police += " 00:00:00.000000"
     print(item_police)

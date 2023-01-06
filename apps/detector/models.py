@@ -10,6 +10,8 @@ class Items(db.Model):
     item_color = db.Column(db.String)
     item_feature = db.Column(db.String)
     item_image_path = db.Column(db.String)
+    item_floor = db.Column(db.String)
+    item_place = db.Column(db.String)
     item_date = db.Column(db.DateTime, default=datetime.now)
     item_right = db.Column(db.Boolean, default=False)
     item_police = db.Column(db.DateTime, default=datetime.now)

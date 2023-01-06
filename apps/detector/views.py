@@ -37,13 +37,6 @@ def register():
     return render_template("detector/register.html")
 
 
-# 拾得物検索画面
-@dt.route("/search")
-@login_required
-def search():
-    return render_template("detector/search.html")
-
-
 # 拾得物登録画面
 @dt.route("/display_image", methods=["GET", "POST"])
 @login_required
@@ -129,6 +122,8 @@ def display_image():
             item_color=register_form.item_color.data,
             item_feature=register_form.item_feature.data,
             item_image_path=moved_path,
+            item_floor=register_form.item_floor.data,
+            item_place=register_form.item_place.data,
             item_right=register_form.item_right.data,
             item_police=register_form.item_police.data,
         )
@@ -173,12 +168,15 @@ class ILSVRCPredictor:
         return predicted_label_name
 
 
+# 登録完了画面
 @dt.route("/commit", methods=["POST"])
+@login_required
 def commit():
     return render_template("detector/commit.html")
 
 
 # 画像の表示
 @dt.route("/images/<path:filename>")
+@login_required
 def image_file(filename):
     return send_from_directory(current_app.config["UPLOAD_FOLDER_2"], filename)

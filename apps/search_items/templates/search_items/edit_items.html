@@ -14,12 +14,26 @@
         {{ form.item_feature.label }} {{ form.item_feature(placeholder="特徴", value=item.item_feature) }}
     </p>
     <p>
+        {{ form.item_floor.label }}{{ form.item_floor(placeholder="拾得場所", value=item.item_floor) }}
+    </p>
+    <p>
+        {{ form.item_place.label }}{{ form.item_place(placeholder="保管場所", value=item.item_place) }}
+    </p>
+    <p>
+        {{ form.item_right.label }}{{ form.item_right(placeholder="権利主張", value=item.item_right) }}
+    </p>
+    <p>
+        {{ form.item_police.label }}{{ form.item_police(placeholder="警察届出日", value=item.item_police) }}
+    </p>
+    <p>
         {{ form.submit(class="btn btn-primary") }}
     </p>
 </form>
 <hr />
 <p>このアイテムを削除したい場合は以下のボタンを押してください</p>
-<form action="{{ url_for('search_items.delete_items', itemid=item.item_id) }}" method="POST" novalidate="novalidate">
+<p>削除後は自動的に拾得物一覧画面へ遷移します。</p>
+<form action="{{ url_for('search_items.delete_item', itemid=item.item_id) }}" method="POST" novalidate="novalidate">
+    {{ form.csrf_token }}
     {{ deleteform.submit(class="btn btn-primary") }}
 </form>
 {% endblock %}

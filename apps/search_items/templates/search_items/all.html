@@ -1,0 +1,48 @@
+{% extends "detector/base.html" %}
+{% block title %}拾得物一覧{% endblock %}
+{% block content %}
+<h2>拾得物の一覧</h2>
+<p>現在データベースに登録されている拾得物のデータです。</p>
+
+<!-- 拾得物の一覧表示 -->
+<div class="card col-md-18 dt-image-content">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>写真</th>
+                <th>品目名</th>
+                <th>色</th>
+                <th>特徴</th>
+                <th>登録日</th>
+                <th>権利主張</th>
+                <th>警察届出日</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in all_items %}
+            <tr>
+                <td>
+                    <a href="{{ url_for('search_items.edit_items', itemid=item.item_id) }}">{{ item.item_id }}（編集）</a>
+                </td>
+                <td class="table-image">
+                    <a href="{{ url_for('search_items.image_file', filename=item.item_image_path) }}"
+                        target="_blank"><img
+                            src="{{ url_for('search_items.image_file', filename=item.item_image_path) }}" alt="拾得物の画像"
+                            width="190" height="130"></a>
+                </td>
+                <td>{{ item.item_name }}</td>
+                <td>{{ item.item_color }}</td>
+                <td>{{ item.item_feature }}</td>
+                <td>{{ item.item_date }}</td>
+                <td>{{ item.item_right }}</td>
+                <td>{{ item.item_police }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<hr />
+<a class="btn btn-primary" href="{{ url_for('detector.index') }}">トップページへ</a>
+{% endblock %}

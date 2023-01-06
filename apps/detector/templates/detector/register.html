@@ -1,55 +1,10 @@
-<!DOCTYPE html>
-<html lang="ja">
+{% extends "detector/base.html" %}
+{% block title %}拾得物の登録{% endblock %}
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-        <title>拾得物の登録</title>
-    </head>
+{% block content %}
+<video id="my-video" autoplay height="400"></video>
+<p>画像の撮影と保存が終了したら、下記の<strong>登録画面へ</strong>を押してください。</p>
+<a class="btn btn-primary" href="{{ url_for('detector.display_image') }}" role="button">登録画面へ</a>
 
-    <body>
-        <!-- ナビゲーションバー -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{{ url_for('detector.index') }}">拾得物管理アプリ</a>
-                <ul class="navbar-nav">
-                    {% if current_user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('detector.register') }}">拾得物登録</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('detector.search') }}">拾得物検索</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.logout') }}">ログアウト</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.signup') }}">ユーザ登録</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.login') }}">ログイン</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </nav>
-
-        <video id="my-video" autoplay height="400"></video>
-        <p>画像の撮影と保存が終了したら、下記の<strong>登録画面へ</strong>を押してください。</p>
-        <a class="btn btn-primary" href="{{ url_for('detector.display_image') }}" role="button">登録画面へ</a>
-
-        {% if current_user.is_authenticated %}
-        <footer class="py-4 bg-dark text-center fixed-bottom">
-            <div>
-                <a href="{{ url_for('crud.users') }}" class="text-white">ユーザ管理</a>
-            </div>
-        </footer>
-        {% endif %}
-
-        <script src="static/js/script.js"></script>
-    </body>
-
-</html>
+<script src="static/js/script.js"></script>
+{% endblock %}

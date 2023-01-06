@@ -34,3 +34,7 @@ class DeleteItem(FlaskForm):
 class Police(FlaskForm):
     item_police = DateField("警察届出予定日")
     submit = SubmitField("検索")
+
+
+class All(FlaskForm):
+    submit = SubmitField("一覧表示")
